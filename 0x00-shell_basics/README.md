@@ -10,4 +10,7 @@ Descibes what all the scripts in the directory do.
 8. 8-firstdelete - deletes the file betty.
 9. 9-firstdirdeletion - Deletes my_first_directory.
 10. 10-back - changes to the previous dir.
-11. 
+11. 11-lists - list multiple directory contents.
+12. 12-file_type - list what type of file.
+13. 13-symbolic_link - Creates a predetermined symlink.
+14. 14-copy_html - copies files to a predetermined location. 
