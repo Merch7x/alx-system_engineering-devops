@@ -5,4 +5,4 @@ Descibes what all the scripts in the directory do.
 3. 3-listfiles - Display current directory contents in along format.
 4. 4-listmorefiles - Displays all files including hidden ones.
 5. 5-listfilesdigitonly - Displays directory contents with group and user uids.
-6
+6. 6-firstdirectory - creates a directory.
