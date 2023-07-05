@@ -6,3 +6,6 @@ Descibes what all the scripts in the directory do.
 4. 4-listmorefiles - Displays all files including hidden ones.
 5. 5-listfilesdigitonly - Displays directory contents with group and user uids.
 6. 6-firstdirectory - creates a directory.
+7. 7-movethatfile - Moves the file betty. 
+8. 8-firstdelete - deletes the file betty.
+9. 
