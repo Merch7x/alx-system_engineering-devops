@@ -8,4 +8,4 @@ Descibes what all the scripts in the directory do.
 6. 6-firstdirectory - creates a directory.
 7. 7-movethatfile - Moves the file betty. 
 8. 8-firstdelete - deletes the file betty.
-9. 
+9. 9-firstdirdeletion - Deletes the directory my_first_directory10.  
