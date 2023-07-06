@@ -11,4 +11,5 @@ Describes what each script is doing
 9. 9-John_Doe - Sets a specififc mode. 
 10. 10-mirror_permissions - Mirro permissions of other file.
 11. 11-directories_permissions - adds permissions to sub dirs.
-12.      
+12. 12-directory_permissions - creates a dir with permissions.
+13.       
