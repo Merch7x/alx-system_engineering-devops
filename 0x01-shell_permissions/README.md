@@ -8,4 +8,5 @@ Describes what each script is doing
 6. 6-multiple_permissions - adds multiple permissions.
 7. 7-everybody - Adds execute perissions to everyone. 
 8. 8-James_Bond - gives others all permissions. 
-9.  
+9. 9-John_Doe - Sets a specififc mode. 
+10.   
