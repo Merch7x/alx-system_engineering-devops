@@ -9,4 +9,5 @@ Describes what each script is doing
 7. 7-everybody - Adds execute perissions to everyone. 
 8. 8-James_Bond - gives others all permissions. 
 9. 9-John_Doe - Sets a specififc mode. 
-10.   
+10. 10-mirror_permissions - Mirro permissions of other file.
+11.    
