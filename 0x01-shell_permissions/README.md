@@ -7,4 +7,5 @@ Describes what each script is doing
 5. 5-execute - add execute permissions to hwllo owner. 
 6. 6-multiple_permissions - adds multiple permissions.
 7. 7-everybody - Adds execute perissions to everyone. 
-8. 
+8. 8-James_Bond - gives others all permissions. 
+9.  
