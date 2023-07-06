@@ -6,4 +6,5 @@ Describes what each script is doing
 4. 4-empty - creates an empty file called hello. 
 5. 5-execute - add execute permissions to hwllo owner. 
 6. 6-multiple_permissions - adds multiple permissions.
-7.  
+7. 7-everybody - Adds execute perissions to everyone. 
+8. 
