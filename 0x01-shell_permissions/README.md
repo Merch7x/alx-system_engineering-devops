@@ -5,4 +5,5 @@ Describes what each script is doing
 3. 3-new_owner - changes file owner to betty. 
 4. 4-empty - creates an empty file called hello. 
 5. 5-execute - add execute permissions to hwllo owner. 
-6. 
+6. 6-multiple_permissions - adds multiple permissions.
+7.  
