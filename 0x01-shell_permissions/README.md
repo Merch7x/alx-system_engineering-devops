@@ -12,4 +12,5 @@ Describes what each script is doing
 10. 10-mirror_permissions - Mirro permissions of other file.
 11. 11-directories_permissions - adds permissions to sub dirs.
 12. 12-directory_permissions - creates a dir with permissions.
-13.       
+13. 13-change_group - changes group owner for file hello.
+14.       
