@@ -1,0 +1,2 @@
+#!/bin/bash
+cut --complement -d $'\t' -f2-6 | sort -t $'\t' -nrk 2 | cut -d $'\t' -f 1 | head
