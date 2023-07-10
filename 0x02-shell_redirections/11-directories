@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -lRda | wc -l  
+ls -1A | find -type d | wc -l 
