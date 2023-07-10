@@ -1,2 +1,2 @@
 #!/bin/bash
-cut --complement -d $'\t' -f2-6 | sort -t $'\t' -nrk 2 | cut -d $'\t' -f 1 | head -11
+tail -n +2 | cut -f -1| sort -k 1|uniq -c|sort -rnk 1|head -n 11|rev|cut -d ' ' -f -1| rev
