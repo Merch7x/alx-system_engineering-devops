@@ -1,0 +1,2 @@
+#!/bin/bash
+sort /etc/passwd | cut --complement -d : -f2-5,7 
