@@ -1,2 +1,2 @@
 #!/bin/bash
-sort /etc/passwd 
+sort /etc/passwd | cut --complement -d : -f 2-5 | cut --complement -d : -f 3 
