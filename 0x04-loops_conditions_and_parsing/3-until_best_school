@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# print a string n times
+
+x=0
+until [ $x -eq 10 ]
+do
+	echo "Best School"
+	x=$(( x + 1 ))
+done
