@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#Displays the time for 12 hours and 59 minutes
+
+Hour=0
+count=0
+
+while [ $count -lt 13 ]
+do
+	echo "Hour: $Hour"
+	seq 59
+	count=$(( count + 1 ))
+	Hour=$(( Hour + 1 ))
+done
