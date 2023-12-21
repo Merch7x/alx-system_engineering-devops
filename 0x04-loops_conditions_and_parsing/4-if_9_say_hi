@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #Print a string n times
 
-x=1
-while [ $x -le 9 ]
+x=0
+while [ $x -ne 10 ]
 do
 	echo "Best School"
 	x=$(( x + 1 ))
