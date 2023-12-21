@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#This scripts prints a string n numbers of time
+
+for _ in $(seq 10); do echo "Best School"; done
