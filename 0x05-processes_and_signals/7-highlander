@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#use trap to interrupt the process
+
+
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+	trap 'echo "I am invincible!!!"' SIGTERM
+done
