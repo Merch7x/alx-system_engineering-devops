@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 #display the pid of a particular process
 
-echo "$(pidof -s bash) bash"
+pid=$(pidof bash)
+
+for pid in $pid; do echo "$pid bash"; done
