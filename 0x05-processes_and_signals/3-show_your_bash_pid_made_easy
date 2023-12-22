@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 #display the pid of a particular process
 
-pid=$(pidof bash)
-
-for pid in $pid; do echo "$pid bash"; done
+pgrep bash -l
