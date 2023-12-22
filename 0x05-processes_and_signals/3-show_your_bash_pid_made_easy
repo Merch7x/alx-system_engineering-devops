@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 #display the pid of a particular process
 
-id=$$
-echo "$id bash"
+echo "$(pidof bash) bash"
