@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+#manage daemon process
+
+if [ $# == 0 ]; then echo "Usage: manage_my_process {start|stop|restart}"; fi
+
+cp manage_my_process /etc/init.d
+
+for arg in "$@"; do
+	case $arg in
+		"start")
+			/etc/init.d/manage_my_process start &
+			echo "$!" > /var/run/my_process.pid && echo "manage_my_process started" 
+			;;
+		"stop")
+			if [ -e /var/run/my_process.pid ];then
+				pkill -f manage_my_process &
+				rm /var/run/my_process.pid
+			fi
+			echo "manage_my_process stopped"
+			;;
+		"restart")
+			/etc/init.d/manage_my_process stop & 
+			rm /var/run/my_process.pid
+			/etc/init.d/manage_my_process start &
+			echo "$!" > /var/run/my_process.pid
+			echo "manage_my_process restarted"
+
+			;;
+		*)
+			echo "Usage: manage_my_process {start|stop|restart} test 2"
+			;;
+	esac
+done
