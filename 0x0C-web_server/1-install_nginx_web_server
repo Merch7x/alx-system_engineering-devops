@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#Installs and configures nginx
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+
+#create absolute path
+AB_PATH=/var/www/html
+mkdir -p "$AB_PATH"
+
+#set permissions
+sudo chmod -R 755 "$AB_PATH"
+sudo chown -R "$USER":"$USER" "$AB_PATH"
+
+#set content
+echo 'Hello World!' > "$AB_PATH/index.nginx-debian.html"
