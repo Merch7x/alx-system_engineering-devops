@@ -3,16 +3,8 @@
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 
-#create absolute path
-AB_PATH=/var/www/html
-mkdir -p "$AB_PATH"
-
-#set permissions
-sudo chmod -R 755 "$AB_PATH"
-sudo chown -R "$USER":"$USER" "$AB_PATH"
-
 #set content
-echo 'Hello World!' > "$AB_PATH/index.nginx-debian.html"
+echo 'Hello World!' | sudo tee /var/www/html/index
 
 #set up redirect
 udo sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/ permanent;' /etc/nginx/sites-available/default
