@@ -22,7 +22,11 @@ server {
     root /var/www/html;
 
     server_name _;
-    rewrite ^ http://merch7x.tech$request_uri? permanent;
+    
+    location /redirect_me {
+
+	return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+}
 
 
     location / {
