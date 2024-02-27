@@ -22,10 +22,8 @@ server {
     root /var/www/html;
 
     server_name _;
+    rewrite ^ http://merch7x.tech$request_uri? permanent;
 
-    location = /redirect_me {
-        return 301 http://example.com/new-path;
-    }
 
     location / {
         try_files \$uri \$uri/ =404;
@@ -35,6 +33,6 @@ EOL
 )
 
 # Add Nginx configuration to the default file using sed
-sudo sed -i '/server {/a '"$CONFIG_BLOCK" /etc/nginx/sites-available/default
+sudo sed -i '/server {/r /dev/stdin' /etc/nginx/sites-available/default <<< "$CONFIG_BLOCK"
 #start nginx
 sudo service nginx start
