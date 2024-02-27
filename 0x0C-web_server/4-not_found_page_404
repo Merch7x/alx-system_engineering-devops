@@ -3,10 +3,13 @@
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 
-#create absolute path
+#create paths
 AB_PATH=/var/www/html
 ERR_PATH=/usr/share/nginx/html
+NGINX_CONFIG=/etc/nginx/
 mkdir -p "$AB_PATH"
+mkdir -p "$ERR_PATH"
+mkdir -p "$NGINX_CONFIG"/sites-available/default
 
 #set permissions
 sudo chmod -R 755 "$AB_PATH"
@@ -29,9 +32,10 @@ server {
 
     server_name _;
 
-    location = /redirect_me/ {
-        return 301 http://example.com/new-path;
-    }
+    location = /redirect_me {
+	return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+	}
+
 
     location / {
         try_files \$uri \$uri/ =404;
