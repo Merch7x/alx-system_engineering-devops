@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#Installs and configures nginx
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+
+#create absolute path
+AB_PATH=/var/www/html
+ERR_PATH=/usr/share/nginx/html
+mkdir -p "$AB_PATH"
+
+#set permissions
+sudo chmod -R 755 "$AB_PATH"
+sudo chmod -R 755 "$ERR_PATH"
+sudo chown -R "$USER":"$USER" "$AB_PATH"
+sudo chown -R "$USER":"$USER" "$ERR_PATH"
+
+#set content
+echo 'Hello World!' > "$AB_PATH/index.nginx-debian.html"
+
+#set error pages
+echo "Ceci n'est pas une page" > "$ERR_PATH/custom_404.html"
+
+#set up redirect
+CONFIG_BLOCK=$(cat <<EOL
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+
+    server_name _;
+
+    location = /redirect_me {
+        return 301 http://example.com/new-path;
+    }
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+            root /usr/share/nginx/html;
+            internal;
+        }
+}
+EOL
+)
+
+# Add Nginx configuration to the default file using sed
+sudo sed -i '/server {/r /dev/stdin' /etc/nginx/sites-available/default <<< "$CONFIG_BLOCK"
+#start nginx
+sudo service nginx start
