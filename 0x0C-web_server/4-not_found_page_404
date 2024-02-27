@@ -9,7 +9,6 @@ ERR_PATH=/usr/share/nginx/html
 NGINX_CONFIG=/etc/nginx/
 mkdir -p "$AB_PATH"
 mkdir -p "$ERR_PATH"
-mkdir -p "$NGINX_CONFIG"/sites-available/default
 
 #set permissions
 sudo chmod -R 755 "$AB_PATH"
