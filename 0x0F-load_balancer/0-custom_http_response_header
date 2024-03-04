@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Adds a custom header to the nginx configuration
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+
+#create paths
+AB_PATH=/var/www/html
+ERR_PATH=/usr/share/nginx/html
+
+mkdir -p "$AB_PATH"
+mkdir -p "$ERR_PATH"
+
+#set permissions
+sudo chmod -R 755 "$AB_PATH"
+sudo chmod -R 755 "$ERR_PATH"
+sudo chown -R "$USER":"$USER" "$AB_PATH"
+sudo chown -R "$USER":"$USER" "$ERR_PATH"
+
+#set content
+echo 'Hello World!' > "$AB_PATH/index.nginx-debian.html"
+
+#set error pages
+echo "Ceci n'est pas une page" > "$ERR_PATH/custom_404.html"
+
+#set up redirect
+
+echo "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+
+    server_name _;
+    rewrite ^/redirect_me https://www.youtube.com/ permanent;
+
+    location / {
+        try_files $uri $uri/ =404;
+        add_header X-Served-By "473257-web-02";
+	}
+
+
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+            root /usr/share/nginx/html;
+            internal;
+        }
+}" > default
+
+# Add Nginx configuration
+sudo mv -f default /etc/nginx/sites-available/default
+#start nginx
+sudo service nginx start
+
+
