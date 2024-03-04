@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# Installs and configures HAproxy for loadbalancing
+#install Haproxy using apt
+sudo apt update -y
+sudo apt-get install haproxy -y
+
+#Modify file ownership and permissions
+sudo chmod 755 -R /etc/default/haproxy
+sudo chown -R "$USER":"$USER" etc/default/haproxy
+
+#Enable haproxy to be started by init
+sudo "ENABLED=1" >> /etc/default/haproxy
+
+# move default conf and create new config
+sudo mv /etc/haproxy/haproxy.cfg{,.original}
+
+#create new config and add blocks to it
+echo "
+	global
+		log 127.0.0.1 local0 notice
+		maxconn 2000
+		user haproxy
+		group haproxy
+
+	defaults
+		log     global
+		mode    http
+		option  httplog
+		option  dontlognull
+		retries 3
+		option redispatch
+		timeout connect  5000
+		timeout client  10000
+		timeout server  10000
+
+	listen appname 0.0.0.0:80
+		mode http
+		stats enable
+		stats uri /haproxy?stats
+		stats realm Strictly\ Private
+		stats auth A_Username:admin
+		stats auth Another_User:admin25
+		balance roundrobin
+		option httpclose
+		option forwardfor
+		server 473257-web-01 54.237.82.60:80 check
+		server 473257-web-02 100.27.4.209:80 check
+		" > haproxy.cfg
+
+#Move the file to the adequate file location
+mv -f haproxy.cfg /etc/haproxy/
+
+#Start haproxy
+sudo service haproxy start
