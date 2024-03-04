@@ -6,9 +6,9 @@ sudo apt-get install haproxy -y
 
 #Modify file ownership and permissions
 sudo chmod 755 -R /etc/default/haproxy
-sudo chown -R "$USER":"$USER" etc/default/haproxy
+sudo chown -R "$USER":"$USER" /etc/default/haproxy
 sudo chmod 755 -R /etc/haproxy
-sudo chown -R "$USER":"$USER" etc/haproxy/
+sudo chown -R "$USER":"$USER" /etc/haproxy/
 
 #Enable haproxy to be started by init
 sudo echo "ENABLED=1" >> /etc/default/haproxy
@@ -35,7 +35,8 @@ defaults
 	timeout client  10000
 	timeout server  10000
 
-listen appname 0.0.0.0:80
+listen appname 
+	bind 0.0.0.0:80
 	mode http
 	stats enable
 	stats uri /haproxy?stats
@@ -45,12 +46,15 @@ listen appname 0.0.0.0:80
 	balance roundrobin
 	option httpclose
 	option forwardfor
-	server web-01 54.237.82.60:80 check
-	server web-02 100.27.4.209:80 check
+	server 473257-web-01 54.237.82.60:80 check
+	server 473257-web-02 100.27.4.209:80 check
 	" > haproxy.cfg
 
 #Move the file to the adequate file location
 mv -f haproxy.cfg /etc/haproxy/
+
+#Check HAProxy config
+#sudo haproxy -c -f /etc/haproxy/haproxy.cfg
 
 #Start haproxy
 sudo service haproxy start
