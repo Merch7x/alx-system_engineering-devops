@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#Install and configure nginx
-service nginx start
-curl 0:80
-service nginx status | grep "nginx is not running"
+#Debug nginx
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+service nginx restart
+pkill -o nginx
