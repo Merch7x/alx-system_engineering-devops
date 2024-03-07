@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#Gets information about domains and subdomains
+
+if [[ "$#" -lt 1 ]];then
+	echo "Usage:domain and sub-domain if exits"
+	exit 1
+fi
+
+dns_lookup() {
+	if [[ "$#" -eq 2 ]];then
+		sub_dns=$(dig "$2.$1" | grep -A1  'ANSWER SECTION:' | awk 'NR%2==0')
+		subdomain=$2
+		record_type=$(echo "$sub_dns" | awk '{ print $4}')
+		destination=$(echo "$sub_dns" | awk '{ print $5}')
+		echo "The subdomain $subdomain is a $record_type record and points to $destination"
+	elif [[ "$#" -eq 1 ]];then
+		subdomains=('www' 'lb-01' 'web-01' 'web-02')
+		for subdomain in "${subdomains[@]}"; do
+			dns=$(dig "$subdomain.$1" | grep -A1 'ANSWER SECTION:' | awk 'NR%2==0')
+			record_type=$(echo "$dns" | awk '{ print $4}')
+			destination=$(echo "$dns" | awk '{ print $5}')
+			echo "The subdomain $subdomain is a $record_type record and points to $destination"
+		done
+	else
+		exit 1
+	fi
+}
+
+dns_lookup $1 $2
