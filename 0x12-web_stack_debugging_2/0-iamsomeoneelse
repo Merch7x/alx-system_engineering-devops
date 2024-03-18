@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#Runs whoami on different users
+if [ $# -lt 1 ]
+then
+	whoami
+else
+	id -nu "$1"
+fi
+
