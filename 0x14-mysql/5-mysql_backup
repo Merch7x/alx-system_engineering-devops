@@ -5,6 +5,7 @@ if [ $# -lt 1 ];
 then
 	echo "Usage: Mysql user password needed"
 else
-	mysqldump -u root -p "$1" --all-databases > backup.sql && tar -czvf "$(date +%d-%m-%Y).tar.gz" backup.sql
+	db=mysqldump -u root -p "$1" --all-databases > backup.sql
+	tar -czvf db "$(date +%d-%m-%Y).tar.gz" 
 fi
 
