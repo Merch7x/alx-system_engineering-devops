@@ -7,6 +7,6 @@ then
 	exit 1
 fi
 
-mysqldump -u root -p "$1" --all-databases > backup.sql
+mysqldump -u root -p "$1" database tyrell_crop > backup.sql
 tar -czvf "$(date +%d-%m-%Y).tar.gz" backup.sql
 
