@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 #create an sql dump of all databases
-mysqldump -u root -p "$1" --all-databases --master-data > backup.sql && tar -czvf "$(date +%d-%m-%Y).tar.gz" backup.sql
+
+if [ $# -lt 1 ];
+then
+	echo "Usage: Mysql user password needed"
+else
+	mysqldump -u root -p "$1" --all-databases > backup.sql && tar -czvf "$(date +%d-%m-%Y).tar.gz" backup.sql
+fi
 
