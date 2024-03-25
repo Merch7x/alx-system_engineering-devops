@@ -25,7 +25,6 @@ if __name__ == "__main__":
         print(f"Error occurred: {err}")
     else:
         username = users.get("username")
-        file_path = "USER_ID.csv"
         with open("{}.json".format(id), "w") as file:
             json.dump({id: [{
                 "task": task.get("title"),
