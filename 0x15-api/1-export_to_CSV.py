@@ -25,8 +25,7 @@ if __name__ == "__main__":
         print(f"Error occurred: {err}")
     else:
         username = users.get("username")
-        file_path = "USER_ID.csv"
-        with open(file_path, "w", newline="") as csv_file:
+        with open("{}.csv".format(id), "w", newline="") as csv_file:
             fieldnames = ["USER_ID", "USERNAME",
                           "TASK_COMPLETED_STATUS", "TASK_TITLE"]
             writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
