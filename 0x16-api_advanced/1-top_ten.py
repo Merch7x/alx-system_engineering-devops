@@ -43,7 +43,7 @@ def top_ten(subreddit):
             headers=headers,
             allow_redirects=False)
     except Exception as err:
-        return 0
+        return None
     else:
         top_posts = response.json().get('data')['children']
         for post in top_posts:
