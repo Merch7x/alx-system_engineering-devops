@@ -37,7 +37,8 @@ def number_of_subscribers(subreddit):
     """Return subscriber count"""
     try:
         response = requests.get(
-            f'https://oauth.reddit.com/r/{subreddit}/about', headers=headers)
+            f'https://oauth.reddit.com/r/{subreddit}/about', headers=headers,
+            allow_redirects=False)
         total_sub = response.json().get('data')['subscribers']
     except Exception as err:
         return 0
