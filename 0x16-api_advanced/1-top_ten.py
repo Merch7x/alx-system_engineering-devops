@@ -42,6 +42,9 @@ def top_ten(subreddit):
             f'https://oauth.reddit.com/r/{subreddit}/top?limit={limit}',
             headers=headers,
             allow_redirects=False)
+        response.raise_for_status()
+    except HTTPError as http_err:
+        return 0
     except Exception as err:
         return None
     else:

@@ -39,7 +39,9 @@ def number_of_subscribers(subreddit):
         response = requests.get(
             f'https://oauth.reddit.com/r/{subreddit}/about', headers=headers,
             allow_redirects=False)
-        total_sub = response.json().get('data')['subscribers']
+        response.raise_for_status()
+    except HTTPError as http_err:
+        return 0
     except Exception as err:
         return 0
     else:
