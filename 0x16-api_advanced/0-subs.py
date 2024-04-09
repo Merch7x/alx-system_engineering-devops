@@ -35,7 +35,12 @@ headers['Authorization'] = "bearer {}".format(
 
 def number_of_subscribers(subreddit):
     """Return subscriber count"""
-    response = requests.get(
-        f'https://oauth.reddit.com/r/{subreddit}/about', headers=headers)
-    total_sub = response.json().get('data')['subscribers']
-    return total_sub
+    try:
+        response = requests.get(
+            f'https://oauth.reddit.com/r/{subreddit}/about', headers=headers)
+        total_sub = response.json().get('data')['subscribers']
+    except Exception as err:
+        return 0
+    else:
+        total_sub = response.json().get('data')['subscribers']
+        return total_sub
