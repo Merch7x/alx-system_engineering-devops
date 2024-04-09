@@ -3,25 +3,39 @@
 returns the number of total subscribers for a given subreddit"""
 import requests
 from requests.exceptions import HTTPError
-import praw
-
-app_id = "6YmHWBdlASK8HtHgAOwJ8A"
-app_secret = "NPiEFJ5bqOKcPOI7DfvT-AMPzU6Pug"
-reddit_username = "FitInspection9287"
-reddit_pass = "ckent2535"
 
 
-def number_of_subscribers(my_subreddit):
-    """Return the number of subscribers"""
-    reddit = praw.Reddit(
-        client_id=app_id,
-        client_secret=app_secret,
-        user_agent=f'MerchApi by {reddit_username}')
+client_id = "6YmHWBdlASK8HtHgAOwJ8A"
+client_secret = "NPiEFJ5bqOKcPOI7DfvT-AMPzU6Pug"
+user_agent = "MerchApi by FitInspection9287"
+username = "FitInspection9287"
+password = "ckent2535"
 
-    # Get top posts from a subreddit
-    subreddit = reddit.subreddit(my_subreddit)
-    if subreddit:
-        sub_total = subreddit.subscribers
-    else:
-        sub_total = 0
-    return sub_total
+headers = {'User-Agent': 'MyApi/1'}
+
+
+def get_access_token(client_id, client_secret):
+    """Retrieve auth token"""
+    data = {
+        'grant_type': 'client_credentials',
+        'username': username,
+        'passowrd': password
+    }
+    auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
+    url = 'https://www.reddit.com/api/v1/access_token'
+    response = requests.post(url, auth=auth, data=data, headers=headers)
+    token = response.json()['access_token']
+    return token
+
+
+headers['Authorization'] = "bearer {}".format(
+   get_access_token(
+    client_id=client_id, client_secret=client_secret))
+
+
+def number_of_subscribers(subreddit):
+    """Return subscriber count"""
+    response = requests.get(
+        f'https://oauth.reddit.com/r/{subreddit}/about', headers=headers)
+    total_sub = response.json().get('data')['subscribers']
+    return total_sub
