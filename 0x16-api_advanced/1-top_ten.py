@@ -30,8 +30,8 @@ def get_access_token(client_id, client_secret):
 
 
 headers['Authorization'] = "bearer {}".format(
-   get_access_token(
-    client_id=client_id, client_secret=client_secret))
+    get_access_token(
+        client_id=client_id, client_secret=client_secret))
 
 
 def top_ten(subreddit):
@@ -44,9 +44,9 @@ def top_ten(subreddit):
             allow_redirects=False)
         response.raise_for_status()
     except HTTPError as http_err:
-        return 0
+        print("None")
     except Exception as err:
-        return None
+        print("None")
     else:
         top_posts = response.json().get('data')['children']
         for post in top_posts:
