@@ -39,7 +39,7 @@ def top_ten(subreddit):
     try:
         limit = 10
         response = requests.get(
-            f'https://oauth.reddit.com/r/{subreddit}/top?limit={limit}',
+            f'https://oauth.reddit.com/r/{subreddit}/hot?limit={limit}',
             headers=headers,
             allow_redirects=False)
         response.raise_for_status()
