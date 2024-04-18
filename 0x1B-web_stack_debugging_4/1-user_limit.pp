@@ -1,11 +1,13 @@
-#Increase the holberton max open files
-
-exec { 'increase-hard-file-limit-for-holberton-user':
-  command => 'sed -i "/holberton hard/s/5/50000/" /etc/security/limits.conf'
-  path    => '/usr/local/bin/:/bin/'
+file { '/etc/security/limits.conf':
+  ensure  => present,
+  content => template('my_module/limits.conf.erb'),
 }
 
-exec { 'increase-soft-file-limit-for-holberton-user':
-  command => 'sed -i "/holberton soft/s/5/50000/" /etc/security/limits.conf'
-  path    => '/usr/local/bin/:/bin/'
+augeas { 'increase-holberton-file-limits':
+  context => '/files/etc/security/limits.conf',
+  changes => [
+    'set user[. = "holberton"]/hard 50000',
+    'set user[. = "holberton"]/soft 50000',
+  ],
 }
+
