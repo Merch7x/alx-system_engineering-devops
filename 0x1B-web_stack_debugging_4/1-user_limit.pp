@@ -1,15 +1,14 @@
 #Updates the max open files limit for the holberton user
 
-file { '/etc/security/limits.conf':
-  ensure  => present,
-  content => template('my_module/limits.conf.erb'),
+user { 'holberton':
+  ensure => 'present',
+  shell  => '/bin/bash',
+  home   => '/home/holberton',
 }
 
-augeas { 'increase-holberton-file-limits':
-  context => '/files/etc/security/limits.conf',
-  changes => [
-    'set user[. = "holberton"]/hard 50000',
-    'set user[. = "holberton"]/soft 50000',
-  ],
+exec { 'change-os-configuration-for-holberton-user':
+  command => '/bin/sh -c "echo \"holberton soft nofile 4096\" >> /etc/security/limits.conf && \
+              echo \"holberton hard nofile 4096\" >> /etc/security/limits.conf"',
+  unless  => '/bin/grep -q "holberton soft nofile 4096" /etc/security/limits.conf && \
+              /bin/grep -q "holberton hard nofile 4096" /etc/security/limits.conf',
 }
-
