@@ -1,3 +1,5 @@
+#Updates the max open files limit for the holberton user
+
 file { '/etc/security/limits.conf':
   ensure  => present,
   content => template('my_module/limits.conf.erb'),
